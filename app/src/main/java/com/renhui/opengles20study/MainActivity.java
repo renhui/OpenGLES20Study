@@ -3,6 +3,7 @@ package com.renhui.opengles20study;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.renhui.opengles20study.glsurface.TriangleGLSurfaceView;
 import com.renhui.opengles20study.glsurface.OvalGLSurfaceView;
 import com.renhui.opengles20study.glsurface.SquareGLSurfaceView;
 
