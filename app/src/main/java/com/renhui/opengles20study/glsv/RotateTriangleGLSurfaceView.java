@@ -13,9 +13,6 @@ public class RotateTriangleGLSurfaceView extends GLSurfaceView {
     public RotateTriangleGLSurfaceView(Context context) {
         super(context);
 
-        // Create an OpenGL ES 2.0 context.
-        setEGLContextClientVersion(2);
-
         // Set the Renderer for drawing on the GLSurfaceView
         mRenderer = new RotateTriangleRenderer();
         setRenderer(mRenderer);

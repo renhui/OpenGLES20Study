@@ -3,7 +3,7 @@ package com.renhui.opengles20study;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.renhui.opengles20study.image.ImageGLSurfaceView;
+import com.renhui.opengles20study.glsv.ImageGLSurfaceView;
 
 import java.io.IOException;
 

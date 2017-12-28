@@ -20,9 +20,6 @@ public class TriangleGLSurfaceView extends GLSurfaceView {
     public TriangleGLSurfaceView(Context context) {
         super(context);
 
-        // Create an OpenGL ES 2.0 context
-        setEGLContextClientVersion(2);
-
         // setRenderer(new TriangleRenderer()); // 绘制三角形
         // setRenderer(new CameraTriangleRenderer()); // 绘制摄像机下的三角形
         setRenderer(new ColorfulTriangleRenderer()); // 绘制摄像机下的彩色三角形

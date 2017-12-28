@@ -17,9 +17,6 @@ public class SquareGLSurfaceView extends GLSurfaceView {
     public SquareGLSurfaceView(Context context) {
         super(context);
 
-        // Create an OpenGL ES 2.0 context
-        setEGLContextClientVersion(2);
-
         // setRenderer(new SquareRenderer()); // 绘制正方形
         setRenderer(new CubeRenderer());  // 绘制立方体
     }

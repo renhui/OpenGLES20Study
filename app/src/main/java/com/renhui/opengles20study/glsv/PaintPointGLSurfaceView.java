@@ -16,7 +16,6 @@ public class PaintPointGLSurfaceView extends GLSurfaceView {
 
     public PaintPointGLSurfaceView(Context context) {
         super(context);
-        this.setEGLContextClientVersion(2);
         this.setRenderer(new PaintPointRenderer(mPoint));
     }
 

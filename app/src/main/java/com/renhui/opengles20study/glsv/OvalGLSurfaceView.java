@@ -3,6 +3,7 @@ package com.renhui.opengles20study.glsv;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 
+import com.renhui.opengles20study.base.BaseGLSurfaceView;
 import com.renhui.opengles20study.shape.oval.Ball;
 import com.renhui.opengles20study.shape.oval.BallWithLight;
 import com.renhui.opengles20study.shape.oval.Cone;
@@ -15,13 +16,10 @@ import javax.microedition.khronos.opengles.GL10;
 /**
  * 绘制圆形的GLSurfaceView
  */
-public class OvalGLSurfaceView extends GLSurfaceView {
+public class OvalGLSurfaceView extends BaseGLSurfaceView {
 
     public OvalGLSurfaceView(Context context) {
         super(context);
-
-        // Create an OpenGL ES 2.0 context
-        setEGLContextClientVersion(2);
 
         setRenderer(new OvalGLSurfaceView.BallWithLightRenderer());
 
