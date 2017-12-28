@@ -1,4 +1,4 @@
-package com.renhui.opengles20study.shape.base;
+package com.renhui.opengles20study.base;
 
 import android.opengl.GLES20;
 import android.util.Log;

@@ -2,16 +2,13 @@ package com.renhui.opengles20study.shape.square;
 
 import android.opengl.GLES20;
 import android.opengl.Matrix;
-import android.view.View;
 
-import com.renhui.opengles20study.shape.base.Shape;
+import com.renhui.opengles20study.base.Shape;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
-
-import javax.microedition.khronos.opengles.GL10;
 
 /**
  * 正方形

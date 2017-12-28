@@ -1,7 +1,6 @@
-package com.renhui.opengles20study.glsurface;
+package com.renhui.opengles20study.glsv;
 
 import android.content.Context;
-import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 
 import com.renhui.opengles20study.shape.oval.Ball;

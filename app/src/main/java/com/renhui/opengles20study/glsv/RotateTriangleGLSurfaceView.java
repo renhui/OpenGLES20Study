@@ -1,4 +1,4 @@
-package com.renhui.opengles20study.glsurface;
+package com.renhui.opengles20study.glsv;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;

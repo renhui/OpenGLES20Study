@@ -3,7 +3,7 @@ package com.renhui.opengles20study.shape.oval;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 
-import com.renhui.opengles20study.shape.base.Shape;
+import com.renhui.opengles20study.base.Shape;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

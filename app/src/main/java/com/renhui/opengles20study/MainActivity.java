@@ -3,11 +3,9 @@ package com.renhui.opengles20study;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.renhui.opengles20study.glsurface.PaintPointGLSurfaceView;
-import com.renhui.opengles20study.glsurface.RotateTriangleGLSurfaceView;
-import com.renhui.opengles20study.glsurface.TriangleGLSurfaceView;
-import com.renhui.opengles20study.glsurface.OvalGLSurfaceView;
-import com.renhui.opengles20study.glsurface.SquareGLSurfaceView;
+import com.renhui.opengles20study.image.ImageGLSurfaceView;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +22,14 @@ public class MainActivity extends AppCompatActivity {
 
         // setContentView(new PaintPointGLSurfaceView(this)); // 手绘点
 
-        setContentView(new RotateTriangleGLSurfaceView(this)); // 旋转三角形
+        // setContentView(new RotateTriangleGLSurfaceView(this)); // 旋转三角形
+
+
+        try {
+            setContentView(new ImageGLSurfaceView(this)); // 加载图片
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
