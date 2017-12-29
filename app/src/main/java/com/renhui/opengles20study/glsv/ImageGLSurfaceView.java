@@ -5,6 +5,7 @@ import android.opengl.GLSurfaceView;
 
 import com.renhui.opengles20study.base.BaseGLSurfaceView;
 import com.renhui.opengles20study.image.ImageRenderer;
+import com.renhui.opengles20study.image.ImageTransformRenderer;
 
 import java.io.IOException;
 
@@ -15,10 +16,14 @@ public class ImageGLSurfaceView extends BaseGLSurfaceView {
 
     ImageRenderer imageRenderer;
 
+    ImageTransformRenderer imageTransformRenderer;
+
     public ImageGLSurfaceView(Context context) throws IOException {
         super(context);
-        imageRenderer = new ImageRenderer(context);
-        setRenderer(imageRenderer);
+
+        // setRenderer(new ImageRenderer(context));  // 展示图片渲染器
+        setRenderer(new ImageTransformRenderer(context, ImageTransformRenderer.Filter.MAGN));
+
         setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
         requestRender();
     }

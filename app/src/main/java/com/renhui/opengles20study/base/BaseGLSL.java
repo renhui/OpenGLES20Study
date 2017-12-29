@@ -8,12 +8,8 @@ import android.util.Log;
  */
 public abstract class BaseGLSL {
 
-    // 每个顶点的坐标数
-    public static final int COORDS_PER_VERTEX = 3;
-
-    // 顶点之间的偏移量
+    public static final int COORDS_PER_VERTEX = 3; // 每个顶点的坐标数
     public static final int vertexStride = COORDS_PER_VERTEX * 4; // 每个顶点四个字节
-
 
     /**
      * 加载着色器
