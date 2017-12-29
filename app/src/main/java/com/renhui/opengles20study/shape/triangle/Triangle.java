@@ -56,17 +56,7 @@ public class Triangle extends BaseGLSL {
         vertexBuffer.put(Triangle.triangleCoords);
         vertexBuffer.position(0);
 
-        int vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode);
-        int fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode);
-
-        //创建一个空的OpenGLES程序
-        mProgram = GLES20.glCreateProgram();
-        //将顶点着色器加入到程序
-        GLES20.glAttachShader(mProgram, vertexShader);
-        //将片元着色器加入到程序中
-        GLES20.glAttachShader(mProgram, fragmentShader);
-        //连接到着色器程序
-        GLES20.glLinkProgram(mProgram);
+        mProgram = createOpenGLProgram(vertexShaderCode, fragmentShaderCode);
     }
 
     public void draw() {

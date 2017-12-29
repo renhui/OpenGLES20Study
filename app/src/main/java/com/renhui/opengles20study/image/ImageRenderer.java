@@ -25,32 +25,31 @@ public class ImageRenderer extends BaseGLSL implements GLSurfaceView.Renderer  {
 
     private static final String vertexMatrixShaderCode =
             "attribute vec4 vPosition;\n" +
-                    "attribute vec2 vCoordinate;\n" +
-                    "uniform mat4 vMatrix;\n" +
-                    "varying vec2 aCoordinate;\n" +
-                    "void main(){\n" +
-                    "    gl_Position=vMatrix*vPosition;\n" +
-                    "    aCoordinate=vCoordinate;\n" +
-                    "}";
+            "attribute vec2 vCoordinate;\n" +
+            "uniform mat4 vMatrix;\n" +
+            "varying vec2 aCoordinate;\n" +
+            "void main(){\n" +
+            "    gl_Position=vMatrix*vPosition;\n" +
+            "    aCoordinate=vCoordinate;\n" +
+            "}";
 
 
     private static final String fragmentShaderCode =
             "precision mediump float;\n" +
-                    "uniform sampler2D vTexture;\n" +
-                    "varying vec2 aCoordinate;\n" +
-                    "void main(){\n" +
-                    "    gl_FragColor=texture2D(vTexture,aCoordinate);\n" +
-                    "}";
+            "uniform sampler2D vTexture;\n" +
+            "varying vec2 aCoordinate;\n" +
+            "void main(){\n" +
+            "    gl_FragColor=texture2D(vTexture,aCoordinate);\n" +
+            "}";
 
-
-    private final float[] sPos = {
+    private static final float[] sPos = {
             -1.0f, 1.0f,    //左上角
             -1.0f, -1.0f,   //左下角
             1.0f, 1.0f,     //右上角
             1.0f, -1.0f     //右下角
     };
 
-    private final float[] sCoord = {
+    private static final float[] sCoord = {
             0.0f, 0.0f,
             0.0f, 1.0f,
             1.0f, 0.0f,
@@ -63,8 +62,6 @@ public class ImageRenderer extends BaseGLSL implements GLSurfaceView.Renderer  {
     private int glHTexture;
     private int glHCoordinate;
     private int glHMatrix;
-    private int hIsHalf;
-    private int glHUxy;
     private Bitmap mBitmap;
     private int textureId;
 
@@ -77,8 +74,8 @@ public class ImageRenderer extends BaseGLSL implements GLSurfaceView.Renderer  {
 
 
     public ImageRenderer(Context context) throws IOException {
-        mBitmap = BitmapFactory.decodeStream(context.getResources().getAssets().open("texture/fengj.png"));
         mContext = context;
+        mBitmap = BitmapFactory.decodeStream(mContext.getResources().getAssets().open("texture/fengj.png"));
         ByteBuffer bb = ByteBuffer.allocateDirect(sPos.length * 4);
         bb.order(ByteOrder.nativeOrder());
         bPos = bb.asFloatBuffer();
@@ -102,8 +99,6 @@ public class ImageRenderer extends BaseGLSL implements GLSurfaceView.Renderer  {
         glHCoordinate = GLES20.glGetAttribLocation(mProgram, "vCoordinate");
         glHTexture = GLES20.glGetUniformLocation(mProgram, "vTexture");
         glHMatrix = GLES20.glGetUniformLocation(mProgram, "vMatrix");
-        hIsHalf = GLES20.glGetUniformLocation(mProgram, "vIsHalf");
-        glHUxy = GLES20.glGetUniformLocation(mProgram, "uXY");
     }
 
     @Override
@@ -170,21 +165,4 @@ public class ImageRenderer extends BaseGLSL implements GLSurfaceView.Renderer  {
         }
         return 0;
     }
-
-    /**
-     * 加载着色器
-     *
-     * @param type       加载着色器类型
-     * @param shaderCode 加载着色器的代码
-     */
-    public static int loadShader(int type, String shaderCode) {
-        //根据type创建顶点着色器或者片元着色器
-        int shader = GLES20.glCreateShader(type);
-        //将资源加入到着色器中，并编译
-        GLES20.glShaderSource(shader, shaderCode);
-        GLES20.glCompileShader(shader);
-        return shader;
-    }
-
-
 }

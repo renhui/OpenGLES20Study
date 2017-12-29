@@ -64,15 +64,7 @@ public class RotateTriangle extends BaseGLSL {
         // set the buffer to read the first coordinate
         vertexBuffer.position(0);
 
-        // prepare shaders and OpenGL program
-        int vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, vertexShaderCode);
-        int fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode);
-
-        mProgram = GLES20.glCreateProgram();             // create empty OpenGL Program
-        GLES20.glAttachShader(mProgram, vertexShader);   // add the vertex shader to program
-        GLES20.glAttachShader(mProgram, fragmentShader); // add the fragment shader to program
-        GLES20.glLinkProgram(mProgram);                  // create OpenGL program executables
-
+        mProgram = createOpenGLProgram(vertexShaderCode, fragmentShaderCode);
     }
 
     /**
