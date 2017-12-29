@@ -1,7 +1,6 @@
 package com.renhui.opengles20study.glsv;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.opengl.GLSurfaceView;
 
 import com.renhui.opengles20study.base.BaseGLSurfaceView;
@@ -18,7 +17,7 @@ public class ImageGLSurfaceView extends BaseGLSurfaceView {
 
     public ImageGLSurfaceView(Context context) throws IOException {
         super(context);
-        imageRenderer = new ImageRenderer(context, BitmapFactory.decodeStream(getResources().getAssets().open("texture/fengj.png")));
+        imageRenderer = new ImageRenderer(context);
         setRenderer(imageRenderer);
         setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
         requestRender();

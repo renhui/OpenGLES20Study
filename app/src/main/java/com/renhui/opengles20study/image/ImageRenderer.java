@@ -2,12 +2,15 @@ package com.renhui.opengles20study.image;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
 import android.opengl.Matrix;
-import android.util.Log;
 
+import com.renhui.opengles20study.base.BaseGLSL;
+
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -17,9 +20,8 @@ import javax.microedition.khronos.opengles.GL10;
 
 /**
  * 图片展示渲染器
- * Created by renhui on 2017/12/28.
  */
-public class ImageRenderer implements GLSurfaceView.Renderer {
+public class ImageRenderer extends BaseGLSL implements GLSurfaceView.Renderer  {
 
     private static final String vertexMatrixShaderCode =
             "attribute vec4 vPosition;\n" +
@@ -74,10 +76,9 @@ public class ImageRenderer implements GLSurfaceView.Renderer {
     private float[] mMVPMatrix = new float[16];
 
 
-    public ImageRenderer(Context context, Bitmap bitmap) {
-        mBitmap = bitmap;
-
-        this.mContext = context;
+    public ImageRenderer(Context context) throws IOException {
+        mBitmap = BitmapFactory.decodeStream(context.getResources().getAssets().open("texture/fengj.png"));
+        mContext = context;
         ByteBuffer bb = ByteBuffer.allocateDirect(sPos.length * 4);
         bb.order(ByteOrder.nativeOrder());
         bPos = bb.asFloatBuffer();
@@ -95,7 +96,7 @@ public class ImageRenderer implements GLSurfaceView.Renderer {
         GLES20.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         GLES20.glEnable(GLES20.GL_TEXTURE_2D);
 
-        createProgram();
+        mProgram = createOpenGLProgram(vertexMatrixShaderCode, fragmentShaderCode);
 
         glHPosition = GLES20.glGetAttribLocation(mProgram, "vPosition");
         glHCoordinate = GLES20.glGetAttribLocation(mProgram, "vCoordinate");
@@ -168,20 +169,6 @@ public class ImageRenderer implements GLSurfaceView.Renderer {
             return texture[0];
         }
         return 0;
-    }
-
-    private void createProgram() {
-        int vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, vertexMatrixShaderCode);
-        int fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentShaderCode);
-
-        //创建一个空的OpenGLES程序
-        mProgram = GLES20.glCreateProgram();
-        //将顶点着色器加入到程序
-        GLES20.glAttachShader(mProgram, vertexShader);
-        //将片元着色器加入到程序中
-        GLES20.glAttachShader(mProgram, fragmentShader);
-        //连接到着色器程序
-        GLES20.glLinkProgram(mProgram);
     }
 
     /**
