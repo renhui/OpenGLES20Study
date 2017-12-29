@@ -2,7 +2,7 @@ package com.renhui.opengles20study.rotate;
 
 import android.opengl.GLES20;
 
-import com.renhui.opengles20study.base.Shape;
+import com.renhui.opengles20study.base.BaseGLSL;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -11,7 +11,7 @@ import java.nio.FloatBuffer;
 /**
  * 旋转三角形
  */
-public class RotateTriangle extends Shape {
+public class RotateTriangle extends BaseGLSL {
 
     private final String vertexShaderCode =
             "uniform mat4 uMVPMatrix;" +

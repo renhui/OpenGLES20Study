@@ -3,7 +3,7 @@ package com.renhui.opengles20study.shape.square;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 
-import com.renhui.opengles20study.base.Shape;
+import com.renhui.opengles20study.base.BaseGLSL;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -13,7 +13,7 @@ import java.nio.ShortBuffer;
 /**
  * 正方形
  */
-public class Square extends Shape {
+public class Square extends BaseGLSL {
 
     private FloatBuffer vertexBuffer;
     private ShortBuffer indexBuffer;

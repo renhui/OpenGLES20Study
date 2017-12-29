@@ -6,7 +6,7 @@ import android.util.Log;
 /**
  * 形状基类
  */
-public abstract class Shape {
+public abstract class BaseGLSL {
 
     // 每个顶点的坐标数
     public static final int COORDS_PER_VERTEX = 3;
@@ -24,14 +24,22 @@ public abstract class Shape {
     public static int loadShader(int type, String shaderCode) {
         //根据type创建顶点着色器或者片元着色器
         int shader = GLES20.glCreateShader(type);
-        //将资源加入到着色器中，并编译
+        //将着色器的代码加入到着色器中
         GLES20.glShaderSource(shader, shaderCode);
+        //编译着色器
         GLES20.glCompileShader(shader);
         return shader;
     }
 
 
-    public static int createProgram(String vertexSource, String fragmentSource) {
+    /**
+     * 生成OpenGL Program
+     *
+     * @param vertexSource   顶点着色器代码
+     * @param fragmentSource 片元着色器代码
+     * @return 生成的OpenGL Program，如果为0，则表示创建失败
+     */
+    public static int createOpenGLProgram(String vertexSource, String fragmentSource) {
         int vertex = loadShader(GLES20.GL_VERTEX_SHADER, vertexSource);
         if (vertex == 0) return 0;
         int fragment = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentSource);
@@ -44,7 +52,7 @@ public abstract class Shape {
             int[] linkStatus = new int[1];
             GLES20.glGetProgramiv(program, GLES20.GL_LINK_STATUS, linkStatus, 0);
             if (linkStatus[0] != GLES20.GL_TRUE) {
-                Log.e("111", "Could not link program:" + GLES20.glGetProgramInfoLog(program));
+                Log.e("BaseGLSL", "Could not link program:" + GLES20.glGetProgramInfoLog(program));
                 GLES20.glDeleteProgram(program);
                 program = 0;
             }

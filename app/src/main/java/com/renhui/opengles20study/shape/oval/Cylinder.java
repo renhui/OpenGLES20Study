@@ -4,7 +4,7 @@ import android.opengl.GLES20;
 import android.opengl.Matrix;
 import android.util.Log;
 
-import com.renhui.opengles20study.base.Shape;
+import com.renhui.opengles20study.base.BaseGLSL;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 /**
  * 圆柱体
  */
-public class Cylinder extends Shape {
+public class Cylinder extends BaseGLSL {
 
     private final static String vertexShaderCode =
             "uniform mat4 vMatrix;\n" +

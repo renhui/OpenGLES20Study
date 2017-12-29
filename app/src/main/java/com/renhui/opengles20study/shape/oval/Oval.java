@@ -3,7 +3,7 @@ package com.renhui.opengles20study.shape.oval;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 
-import com.renhui.opengles20study.base.Shape;
+import com.renhui.opengles20study.base.BaseGLSL;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 /**
  * 圆
  */
-public class Oval extends Shape {
+public class Oval extends BaseGLSL {
 
     private FloatBuffer vertexBuffer;
 

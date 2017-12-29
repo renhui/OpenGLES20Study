@@ -3,7 +3,7 @@ package com.renhui.opengles20study.shape.oval;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 
-import com.renhui.opengles20study.base.Shape;
+import com.renhui.opengles20study.base.BaseGLSL;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * 圆锥
  */
-public class Cone extends Shape {
+public class Cone extends BaseGLSL {
 
     private final static String vertexShaderCode =
             "uniform mat4 vMatrix;\n" +

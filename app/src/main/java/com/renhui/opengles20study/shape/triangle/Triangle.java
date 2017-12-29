@@ -2,7 +2,7 @@ package com.renhui.opengles20study.shape.triangle;
 
 import android.opengl.GLES20;
 
-import com.renhui.opengles20study.base.Shape;
+import com.renhui.opengles20study.base.BaseGLSL;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -11,7 +11,7 @@ import java.nio.FloatBuffer;
 /**
  * 普通三角形
  */
-public class Triangle extends Shape {
+public class Triangle extends BaseGLSL {
 
     // 简单的顶点着色器
     public static final String vertexShaderCode =
