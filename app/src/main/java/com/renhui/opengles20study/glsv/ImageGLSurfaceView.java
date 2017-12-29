@@ -22,7 +22,7 @@ public class ImageGLSurfaceView extends BaseGLSurfaceView {
         super(context);
 
         // setRenderer(new ImageRenderer(context));  // 展示图片渲染器
-        setRenderer(new ImageTransformRenderer(context, ImageTransformRenderer.Filter.MAGN));
+        setRenderer(new ImageTransformRenderer(context, ImageTransformRenderer.Filter.MAGN));  // 展示图片处理渲染器
 
         setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
         requestRender();
