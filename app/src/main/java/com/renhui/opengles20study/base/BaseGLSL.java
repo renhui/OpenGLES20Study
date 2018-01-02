@@ -8,6 +8,8 @@ import android.util.Log;
  */
 public abstract class BaseGLSL {
 
+    private static final String TAG = "BaseGLSL";
+
     public static final int COORDS_PER_VERTEX = 3; // 每个顶点的坐标数
     public static final int vertexStride = COORDS_PER_VERTEX * 4; // 每个顶点四个字节
 
@@ -37,9 +39,15 @@ public abstract class BaseGLSL {
      */
     public static int createOpenGLProgram(String vertexSource, String fragmentSource) {
         int vertex = loadShader(GLES20.GL_VERTEX_SHADER, vertexSource);
-        if (vertex == 0) return 0;
+        if (vertex == 0) {
+            Log.e(TAG, "loadShader vertex failed");
+            return 0;
+        }
         int fragment = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentSource);
-        if (fragment == 0) return 0;
+        if (fragment == 0) {
+            Log.e(TAG, "loadShader fragment failed");
+            return 0;
+        }
         int program = GLES20.glCreateProgram();
         if (program != 0) {
             GLES20.glAttachShader(program, vertex);
@@ -48,7 +56,7 @@ public abstract class BaseGLSL {
             int[] linkStatus = new int[1];
             GLES20.glGetProgramiv(program, GLES20.GL_LINK_STATUS, linkStatus, 0);
             if (linkStatus[0] != GLES20.GL_TRUE) {
-                Log.e("BaseGLSL", "Could not link program:" + GLES20.glGetProgramInfoLog(program));
+                Log.e(TAG, "Could not link program:" + GLES20.glGetProgramInfoLog(program));
                 GLES20.glDeleteProgram(program);
                 program = 0;
             }

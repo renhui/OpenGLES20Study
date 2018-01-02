@@ -4,13 +4,14 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
 
+import com.renhui.opengles20study.base.BaseGLSurfaceView;
 import com.renhui.opengles20study.paint.PaintPoint;
 import com.renhui.opengles20study.paint.PaintPointRenderer;
 
 /**
  * 画笔点 GLSurfaceView
  */
-public class PaintPointGLSurfaceView extends GLSurfaceView {
+public class PaintPointGLSurfaceView extends BaseGLSurfaceView {
 
     PaintPoint mPoint = new PaintPoint();
 

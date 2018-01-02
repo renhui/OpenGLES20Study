@@ -64,7 +64,7 @@ public class ColorfulTriangle extends Triangle {
         colorBuffer.put(color);
         colorBuffer.position(0);
 
-        mProgram = createOpenGLProgram(vertexShaderCode, fragmentShaderCode);
+        mProgram = createOpenGLProgram(vertexColorShaderCode, fragmentColorShaderCode);
     }
 
     public void onSurfaceChanged(int width, int height) {

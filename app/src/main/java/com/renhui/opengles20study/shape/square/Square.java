@@ -2,6 +2,7 @@ package com.renhui.opengles20study.shape.square;
 
 import android.opengl.GLES20;
 import android.opengl.Matrix;
+import android.util.Log;
 
 import com.renhui.opengles20study.base.BaseGLSL;
 
@@ -60,8 +61,7 @@ public class Square extends BaseGLSL {
     float color[] = {1.0f, 1.0f, 1.0f, 1.0f};
 
     public Square() {
-        ByteBuffer bb = ByteBuffer.allocateDirect(
-                triangleCoords.length * 4);
+        ByteBuffer bb = ByteBuffer.allocateDirect(triangleCoords.length * 4);
         bb.order(ByteOrder.nativeOrder());
         vertexBuffer = bb.asFloatBuffer();
         vertexBuffer.put(triangleCoords);

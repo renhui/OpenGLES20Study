@@ -4,6 +4,7 @@ import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 
+import com.renhui.opengles20study.base.BaseGLSurfaceView;
 import com.renhui.opengles20study.shape.triangle.CameraTriangle;
 import com.renhui.opengles20study.shape.triangle.ColorfulTriangle;
 import com.renhui.opengles20study.shape.triangle.Triangle;
@@ -15,7 +16,7 @@ import javax.microedition.khronos.opengles.GL10;
 /**
  *  绘制各类三角形的GLSurfaceView
  */
-public class TriangleGLSurfaceView extends GLSurfaceView {
+public class TriangleGLSurfaceView extends BaseGLSurfaceView {
 
     public TriangleGLSurfaceView(Context context) {
         super(context);

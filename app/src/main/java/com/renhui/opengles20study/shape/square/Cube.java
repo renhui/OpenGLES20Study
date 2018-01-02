@@ -114,6 +114,10 @@ public class Cube extends BaseGLSL {
         Matrix.multiplyMM(mMVPMatrix, 0, mProjectMatrix, 0, mViewMatrix, 0);
     }
 
+    public void setMatrix(float[] matrix) {
+        this.mMVPMatrix = matrix;
+    }
+
     public void draw() {
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
         //将程序加入到OpenGLES2.0环境
@@ -121,7 +125,9 @@ public class Cube extends BaseGLSL {
         //获取变换矩阵vMatrix成员句柄
         mMatrixHandler = GLES20.glGetUniformLocation(mProgram, "vMatrix");
         //指定vMatrix的值
-        GLES20.glUniformMatrix4fv(mMatrixHandler, 1, false, mMVPMatrix, 0);
+        if (mMVPMatrix != null) {
+            GLES20.glUniformMatrix4fv(mMatrixHandler, 1, false, mMVPMatrix, 0);
+        }
         //获取顶点着色器的vPosition成员句柄
         mPositionHandle = GLES20.glGetAttribLocation(mProgram, "vPosition");
         //启用三角形顶点的句柄

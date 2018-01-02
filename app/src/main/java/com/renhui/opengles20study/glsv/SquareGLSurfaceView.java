@@ -3,6 +3,7 @@ package com.renhui.opengles20study.glsv;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 
+import com.renhui.opengles20study.base.BaseGLSurfaceView;
 import com.renhui.opengles20study.shape.square.Cube;
 import com.renhui.opengles20study.shape.square.Square;
 
@@ -12,7 +13,7 @@ import javax.microedition.khronos.opengles.GL10;
 /**
  * 绘制正方形的GLSurfaceView
  */
-public class SquareGLSurfaceView extends GLSurfaceView {
+public class SquareGLSurfaceView extends BaseGLSurfaceView {
 
     public SquareGLSurfaceView(Context context) {
         super(context);

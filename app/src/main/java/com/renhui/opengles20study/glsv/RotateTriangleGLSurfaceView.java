@@ -4,9 +4,10 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
 
+import com.renhui.opengles20study.base.BaseGLSurfaceView;
 import com.renhui.opengles20study.rotate.RotateTriangleRenderer;
 
-public class RotateTriangleGLSurfaceView extends GLSurfaceView {
+public class RotateTriangleGLSurfaceView extends BaseGLSurfaceView {
 
     private final RotateTriangleRenderer mRenderer;
 
