@@ -39,7 +39,7 @@ public class CameraTriangle extends Triangle {
         vertexBuffer = bb.asFloatBuffer();
         vertexBuffer.put(triangleCoords);
         vertexBuffer.position(0);
-        mProgram = createOpenGLProgram(vertexShaderCode, fragmentShaderCode);
+        mProgram = createOpenGLProgram(vertexMatrixShaderCode, fragmentShaderCode);
     }
 
     public void onSurfaceChanged(int width, int height) {
