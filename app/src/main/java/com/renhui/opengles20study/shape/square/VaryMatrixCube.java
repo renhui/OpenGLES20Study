@@ -11,8 +11,7 @@ import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
 /**
- * 多种
- * Created by renhui on 2018/1/4.
+ * 多种矩阵变换的正方体
  */
 public class VaryMatrixCube extends BaseGLSL {
 
@@ -37,7 +36,6 @@ public class VaryMatrixCube extends BaseGLSL {
 
     private int mProgram;
 
-    final int COORDS_PER_VERTEX = 3;
     final float cubePositions[] = {
             -1.0f, 1.0f, 1.0f,    //正面左上0
             -1.0f, -1.0f, 1.0f,   //正面左下1
@@ -71,8 +69,6 @@ public class VaryMatrixCube extends BaseGLSL {
     private int mPositionHandle;
     private int mColorHandle;
 
-    private float[] mViewMatrix = new float[16];
-    private float[] mProjectMatrix = new float[16];
     private float[] mMVPMatrix = new float[16];
 
     private int mMatrixHandler;

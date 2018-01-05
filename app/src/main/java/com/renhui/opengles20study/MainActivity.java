@@ -16,9 +16,9 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-         setContentView(new TriangleGLSurfaceView(this)); // 绘制三角形
+        // setContentView(new TriangleGLSurfaceView(this)); // 绘制三角形
 
-        // setContentView(new SquareGLSurfaceView(this));  // 绘制正方形
+        setContentView(new SquareGLSurfaceView(this));  // 绘制正方形
 
         // setContentView(new OvalGLSurfaceView(this)); // 绘制圆形
 
