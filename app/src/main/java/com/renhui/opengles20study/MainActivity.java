@@ -1,8 +1,10 @@
 package com.renhui.opengles20study;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.renhui.opengles20study.camera.CameraActivity;
 import com.renhui.opengles20study.glsv.ImageGLSurfaceView;
 import com.renhui.opengles20study.glsv.SquareGLSurfaceView;
 import com.renhui.opengles20study.glsv.TriangleGLSurfaceView;
@@ -18,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         // setContentView(new TriangleGLSurfaceView(this)); // 绘制三角形
 
-        setContentView(new SquareGLSurfaceView(this));  // 绘制正方形
+        // setContentView(new SquareGLSurfaceView(this));  // 绘制正方形
 
         // setContentView(new OvalGLSurfaceView(this)); // 绘制圆形
 
@@ -28,6 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
         // setContentView(new ImageGLSurfaceView(this)); // 加载图片
 
-
+        startActivity(new Intent(this, CameraActivity.class));
     }
 }
