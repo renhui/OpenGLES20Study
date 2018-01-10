@@ -44,16 +44,16 @@ public class GLCameraDrawer implements GLSurfaceView.Renderer {
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
-
-
+        setViewSize(width,height);
     }
 
     @Override
     public void onDrawFrame(GL10 gl) {
         if (surfaceTexture != null) {
-            surfaceTexture.updateTexImage(); // SurfaceTexture 更新纹理图像为从图像流中提取的最近一帧
+            // 更新纹理图像为从图像流中提取的最近一帧
+            surfaceTexture.updateTexImage();
         }
-
+        // 绘制纹理
         mOesFilter.draw();
     }
 
@@ -92,7 +92,6 @@ public class GLCameraDrawer implements GLSurfaceView.Renderer {
         return m;
     }
 
-
     // 创建纹理ID
     private int createTextureID() {
         int[] texture = new int[1];
@@ -124,5 +123,4 @@ public class GLCameraDrawer implements GLSurfaceView.Renderer {
             Matrix.multiplyMM(matrix, 0, projection, 0, camera, 0);
         }
     }
-
 }
