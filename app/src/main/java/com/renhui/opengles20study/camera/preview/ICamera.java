@@ -1,4 +1,4 @@
-package com.renhui.opengles20study.camera;
+package com.renhui.opengles20study.camera.preview;
 
 import android.graphics.Point;
 import android.graphics.SurfaceTexture;
@@ -15,7 +15,6 @@ public interface ICamera {
      * @return 是否成功打开摄像头
      */
     boolean open(int cameraId);
-
 
     /**
      * 预览摄像头内容
@@ -43,6 +42,4 @@ public interface ICamera {
         int minPreviewWidth;
         int minPictureWidth;
     }
-
-
 }

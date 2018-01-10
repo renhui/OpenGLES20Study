@@ -4,12 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.renhui.opengles20study.camera.CameraActivity;
-import com.renhui.opengles20study.glsv.ImageGLSurfaceView;
-import com.renhui.opengles20study.glsv.SquareGLSurfaceView;
-import com.renhui.opengles20study.glsv.TriangleGLSurfaceView;
-
-import java.io.IOException;
+import com.renhui.opengles20study.camera.preview.PreviewCameraActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
         // setContentView(new ImageGLSurfaceView(this)); // 加载图片
 
-        startActivity(new Intent(this, CameraActivity.class));
+        startActivity(new Intent(this, PreviewCameraActivity.class));
     }
 }

@@ -1,4 +1,4 @@
-package com.renhui.opengles20study.camera;
+package com.renhui.opengles20study.camera.preview;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,9 +10,9 @@ import android.widget.Toast;
 import com.renhui.opengles20study.R;
 
 /**
- * 摄像头处理页面
+ * 使用OpenGL预览摄像头界面
  */
-public class CameraActivity extends AppCompatActivity {
+public class PreviewCameraActivity extends AppCompatActivity {
 
     private CameraView mCameraView;
 
@@ -59,7 +59,7 @@ public class CameraActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(CameraActivity.this, msg, Toast.LENGTH_LONG).show();
+                Toast.makeText(PreviewCameraActivity.this, msg, Toast.LENGTH_LONG).show();
             }
         });
     }

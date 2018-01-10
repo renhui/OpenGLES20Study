@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".camera.CameraActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".camera.preview.PreviewCameraActivity" android:screenOrientation="portrait"/>
 
     </application>
 

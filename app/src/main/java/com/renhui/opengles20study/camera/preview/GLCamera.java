@@ -1,4 +1,4 @@
-package com.renhui.opengles20study.camera;
+package com.renhui.opengles20study.camera.preview;
 
 import android.graphics.Point;
 import android.graphics.SurfaceTexture;

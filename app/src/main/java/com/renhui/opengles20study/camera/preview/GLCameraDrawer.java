@@ -1,4 +1,4 @@
-package com.renhui.opengles20study.camera;
+package com.renhui.opengles20study.camera.preview;
 
 import android.graphics.SurfaceTexture;
 import android.opengl.GLES11Ext;
