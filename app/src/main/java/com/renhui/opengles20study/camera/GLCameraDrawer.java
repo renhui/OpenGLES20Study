@@ -51,7 +51,7 @@ public class GLCameraDrawer implements GLSurfaceView.Renderer {
     @Override
     public void onDrawFrame(GL10 gl) {
         if (surfaceTexture != null) {
-            surfaceTexture.updateTexImage();
+            surfaceTexture.updateTexImage(); // SurfaceTexture 更新纹理图像为从图像流中提取的最近一帧
         }
 
         mOesFilter.draw();

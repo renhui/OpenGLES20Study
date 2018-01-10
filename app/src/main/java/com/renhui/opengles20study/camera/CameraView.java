@@ -17,7 +17,7 @@ import javax.microedition.khronos.opengles.GL10;
  */
 public class CameraView extends BaseGLSurfaceView implements GLSurfaceView.Renderer {
 
-    public static final int cameraId = 1;  // 要打开的摄像头的ID
+    public static int cameraId = 1;  // 要打开的摄像头的ID
 
     private GLCamera mCamera;
     private GLCameraDrawer mCameraDrawer;
@@ -25,15 +25,28 @@ public class CameraView extends BaseGLSurfaceView implements GLSurfaceView.Rende
     public CameraView(Context context) {
         super(context);
 
-        this.setRenderer(this);  // 设置渲染器
+        setRenderer(this);  // 设置渲染器
 
         mCamera = new GLCamera(); // 创建摄像头资源
         mCameraDrawer = new GLCameraDrawer();
     }
 
     public CameraView(Context context, AttributeSet attr) {
-        this(context);
+        super(context, attr);
+
+        setRenderer(this);  // 设置渲染器
+
+        mCamera = new GLCamera(); // 创建摄像头资源
+        mCameraDrawer = new GLCameraDrawer();
     }
+
+    // 切换摄像头
+    public void switchCamera() {
+        cameraId = cameraId == 1 ? 0 : 1;
+        onPause();
+        onResume();
+    }
+
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
