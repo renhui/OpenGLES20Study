@@ -56,33 +56,11 @@ public class GLCamera implements ICamera {
     }
 
     @Override
-    public void setConfig(Config config) {
-
-    }
-
-    @Override
     public boolean preview() {
         if (mCamera != null) {
             mCamera.startPreview();
         }
         return true;
-    }
-
-    /**
-     * 切换到指定的摄像头
-     * @param cameraId 要切换的摄像头的ID
-     * @return
-     */
-    @Override
-    public boolean switchTo(int cameraId) {
-        close();  // 先关闭之前的摄像头，并释放资源
-        open(cameraId);  // 打开指定的摄像头
-        return false;
-    }
-
-    @Override
-    public void takePhoto(TakePhotoCallback callback) {
-
     }
 
     @Override
@@ -114,17 +92,6 @@ public class GLCamera implements ICamera {
     public Point getPreviewSize() {
         return mPreSize;
     }
-
-    @Override
-    public Point getPictureSize() {
-        return null;
-    }
-
-    @Override
-    public void setOnPreviewFrameCallback(PreviewFrameCallback callback) {
-
-    }
-
 
     private Camera.Size getPropPreviewSize(List<Camera.Size> list, float th, int minWidth) {
         Collections.sort(list, sizeComparator);

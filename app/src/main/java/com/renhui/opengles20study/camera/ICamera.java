@@ -10,33 +10,33 @@ public interface ICamera {
 
     /**
      * 打开摄像头
+     *
      * @param cameraId 打开的摄像头的ID
      * @return 是否成功打开摄像头
      */
     boolean open(int cameraId);
 
-    void setConfig(Config config);
 
+    /**
+     * 预览摄像头内容
+     */
     boolean preview();
 
     /**
-     * 切换摄像头
-     * @param cameraId 要切换的摄像头的ID
-     * @return 是否切换成功
+     * 关闭摄像头
      */
-    boolean switchTo(int cameraId);
-
-    void takePhoto(TakePhotoCallback callback);
-
     boolean close();
 
+    /**
+     * 设置展示摄像头的图像数据的容器
+     * @param texture
+     */
     void setPreviewTexture(SurfaceTexture texture);
 
+    /**
+     * 获取预览尺寸
+     */
     Point getPreviewSize();
-
-    Point getPictureSize();
-
-    void setOnPreviewFrameCallback(PreviewFrameCallback callback);
 
     class Config {
         float rate; //宽高比
@@ -44,11 +44,5 @@ public interface ICamera {
         int minPictureWidth;
     }
 
-    interface TakePhotoCallback {
-        void onTakePhoto(byte[] bytes, int width, int height);
-    }
 
-    interface PreviewFrameCallback {
-        void onPreviewFrame(byte[] bytes, int width, int height);
-    }
 }

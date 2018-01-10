@@ -1,6 +1,5 @@
 package com.renhui.opengles20study.camera;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +11,6 @@ import com.renhui.opengles20study.R;
 
 /**
  * 摄像头处理页面
- * Created by renhui on 2018/1/5.
  */
 public class CameraActivity extends AppCompatActivity {
 
