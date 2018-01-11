@@ -10,7 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * OpenGL使用的摄像头
+ * 使用后OpenGL预览的摄像头控制逻辑
  */
 public class GLCamera implements ICamera {
 
