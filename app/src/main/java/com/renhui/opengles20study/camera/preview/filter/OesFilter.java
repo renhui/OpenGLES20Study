@@ -1,4 +1,4 @@
-package com.renhui.opengles20study.camera.filter;
+package com.renhui.opengles20study.camera.preview.filter;
 
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;

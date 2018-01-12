@@ -6,8 +6,8 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 
-import com.renhui.opengles20study.camera.filter.BaseFilter;
-import com.renhui.opengles20study.camera.filter.OesFilter;
+import com.renhui.opengles20study.camera.preview.filter.BaseFilter;
+import com.renhui.opengles20study.camera.preview.filter.OesFilter;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;

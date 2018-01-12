@@ -1,6 +1,5 @@
-package com.renhui.opengles20study.camera.filter;
+package com.renhui.opengles20study.camera.preview.filter;
 
-import android.content.res.Resources;
 import android.opengl.GLES20;
 import android.util.SparseArray;
 
@@ -9,17 +8,12 @@ import com.renhui.opengles20study.base.BaseGLSL;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
-import java.nio.ShortBuffer;
 import java.util.Arrays;
 
 /**
  * 基础颜色过滤器
  */
 public abstract class BaseFilter extends BaseGLSL {
-
-    public static final int KEY_OUT = 0x101;
-    public static final int KEY_IN = 0x102;
-    public static final int KEY_INDEX = 0x201;
 
     /**
      * 单位矩阵
@@ -52,9 +46,6 @@ public abstract class BaseFilter extends BaseGLSL {
      */
     protected int mHTexture;
 
-    protected Resources mRes;
-
-
     /**
      * 顶点坐标Buffer
      */
@@ -64,13 +55,6 @@ public abstract class BaseFilter extends BaseGLSL {
      * 纹理坐标Buffer
      */
     protected FloatBuffer mTexBuffer;
-
-    /**
-     * 索引坐标Buffer
-     */
-    protected ShortBuffer mindexBuffer;
-
-    protected int mFlag = 0;
 
     private float[] matrix = Arrays.copyOf(OM, 16);
 
@@ -138,63 +122,6 @@ public abstract class BaseFilter extends BaseGLSL {
 
     public final void setTextureId(int textureId) {
         this.textureId = textureId;
-    }
-
-    public void setFlag(int flag) {
-        this.mFlag = flag;
-    }
-
-    public int getFlag() {
-        return mFlag;
-    }
-
-    public void setFloat(int type, float... params) {
-        if (mFloats == null) {
-            mFloats = new SparseArray<>();
-        }
-        mFloats.put(type, params);
-    }
-
-    public void setInt(int type, int... params) {
-        if (mInts == null) {
-            mInts = new SparseArray<>();
-        }
-        mInts.put(type, params);
-    }
-
-    public void setBool(int type, boolean... params) {
-        if (mBools == null) {
-            mBools = new SparseArray<>();
-        }
-        mBools.put(type, params);
-    }
-
-    public boolean getBool(int type, int index) {
-        if (mBools == null) return false;
-        boolean[] b = mBools.get(type);
-        return !(b == null || b.length <= index) && b[index];
-    }
-
-    public int getInt(int type, int index) {
-        if (mInts == null) return 0;
-        int[] b = mInts.get(type);
-        if (b == null || b.length <= index) {
-            return 0;
-        }
-        return b[index];
-    }
-
-    public float getFloat(int type, int index) {
-        if (mFloats == null) return 0;
-        float[] b = mFloats.get(type);
-        if (b == null || b.length <= index) {
-            return 0;
-        }
-        return b[index];
-    }
-
-    public int getOutputTexture() {
-        return -1;
     }
 
     /**
