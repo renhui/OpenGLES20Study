@@ -12,7 +12,6 @@ public class CameraFilter extends OesFilter {
     @Override
     protected void initBuffer() {
         super.initBuffer();
-        movie();
     }
 
     @Override
@@ -43,18 +42,6 @@ public class CameraFilter extends OesFilter {
                 0.0f, 0.0f,
                 1.0f, 1.0f,
                 0.0f, 1.0f,
-        };
-        mTexBuffer.clear();
-        mTexBuffer.put(coord);
-        mTexBuffer.position(0);
-    }
-
-    private void movie() {
-        float[] coord = new float[]{
-                0.0f, 0.0f,
-                0.0f, 1.0f,
-                1.0f, 0.0f,
-                1.0f, 1.0f,
         };
         mTexBuffer.clear();
         mTexBuffer.put(coord);
