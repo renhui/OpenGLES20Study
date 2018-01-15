@@ -7,6 +7,7 @@ import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -36,45 +37,35 @@ public class TakePictureActivity extends Activity implements FrameCallback {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initViewRunnable.run();
-    }
 
+        mRenderer = new Camera1Renderer();
 
-    protected void setContentView() {
         setContentView(R.layout.activity_takepic);
+
+        mSurfaceView = (SurfaceView) findViewById(R.id.mSurface);
+
+        mController = new TextureController(TakePictureActivity.this);
+
+        mController.setFrameCallback(1080, 1920, TakePictureActivity.this);
+
+        mSurfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
+            @Override
+            public void surfaceCreated(SurfaceHolder holder) {
+                mController.surfaceCreated(holder);
+                mController.setRenderer(mRenderer);
+            }
+
+            @Override
+            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+                mController.surfaceChanged(width, height);
+            }
+
+            @Override
+            public void surfaceDestroyed(SurfaceHolder holder) {
+                mController.surfaceDestroyed();
+            }
+        });
     }
-
-    private Runnable initViewRunnable = new Runnable() {
-        @Override
-        public void run() {
-
-            mRenderer = new Camera1Renderer();
-
-            setContentView();
-            mSurfaceView = (SurfaceView) findViewById(R.id.mSurface);
-            mController = new TextureController(TakePictureActivity.this);
-
-            mController.setFrameCallback(720, 1280, TakePictureActivity.this);
-            mSurfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
-                @Override
-                public void surfaceCreated(SurfaceHolder holder) {
-                    mController.surfaceCreated(holder);
-                    mController.setRenderer(mRenderer);
-                }
-
-                @Override
-                public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-                    mController.surfaceChanged(width, height);
-                }
-
-                @Override
-                public void surfaceDestroyed(SurfaceHolder holder) {
-                    mController.surfaceDestroyed();
-                }
-            });
-
-        }
-    };
 
     public void onClick(View view) {
         switch (view.getId()) {
@@ -113,7 +104,7 @@ public class TakePictureActivity extends Activity implements FrameCallback {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Bitmap bitmap = Bitmap.createBitmap(720, 1280, Bitmap.Config.ARGB_8888);
+                Bitmap bitmap = Bitmap.createBitmap(1080, 1920, Bitmap.Config.ARGB_8888);
                 ByteBuffer b = ByteBuffer.wrap(bytes);
                 bitmap.copyPixelsFromBuffer(b);
                 saveBitmap(bitmap);
@@ -183,6 +174,7 @@ public class TakePictureActivity extends Activity implements FrameCallback {
             mCamera = Camera.open(cameraId);
             mController.setImageDirection(cameraId);
             Camera.Size size = mCamera.getParameters().getPreviewSize();
+            Log.e("111", size.width + "////" + size.height);
             mController.setDataSize(size.height, size.width);
             try {
                 mCamera.setPreviewTexture(mController.getTexture());
