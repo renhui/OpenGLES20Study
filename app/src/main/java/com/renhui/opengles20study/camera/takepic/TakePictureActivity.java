@@ -2,6 +2,7 @@ package com.renhui.opengles20study.camera.takepic;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.renhui.opengles20study.R;
+import com.renhui.opengles20study.camera.takepic.filter.WaterMarkFilter;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -29,10 +31,11 @@ import javax.microedition.khronos.opengles.GL10;
  */
 public class TakePictureActivity extends Activity implements FrameCallback {
 
+    private static final int cameraId = 1;  // 要打开的摄像头的ID
+
     private SurfaceView mSurfaceView;
     private TextureController mController;
     private Renderer mRenderer;
-    private int cameraId = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,9 +45,16 @@ public class TakePictureActivity extends Activity implements FrameCallback {
 
         setContentView(R.layout.activity_takepic);
 
-        mSurfaceView = (SurfaceView) findViewById(R.id.mSurface);
+        mSurfaceView = findViewById(R.id.mSurface);
 
         mController = new TextureController(TakePictureActivity.this);
+
+        // 添加水印
+        WaterMarkFilter filter = new WaterMarkFilter(getResources());
+        filter.setWaterMark(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
+        filter.setPosition(600, 500, 192, 192);
+
+        mController.addFilter(filter);
 
         mController.setFrameCallback(1080, 1920, TakePictureActivity.this);
 

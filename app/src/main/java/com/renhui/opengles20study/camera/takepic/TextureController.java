@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.renhui.opengles20study.camera.takepic.filter.AFilter;
+import com.renhui.opengles20study.camera.takepic.filter.GroupFilter;
 import com.renhui.opengles20study.camera.takepic.filter.NoFilter;
 import com.renhui.opengles20study.camera.takepic.filter.TextureFilter;
 import com.renhui.opengles20study.camera.takepic.utils.EasyGlUtils;
@@ -28,6 +29,7 @@ import javax.microedition.khronos.opengles.GL10;
  * 的Surface上，而是将内容绘制到外部提供的Surface、SurfaceHolder或者SurfaceTexture上。
  */
 public class TextureController implements GLSurfaceView.Renderer {
+
     private Object surface;
 
     private GLView mGLView;
@@ -35,6 +37,7 @@ public class TextureController implements GLSurfaceView.Renderer {
 
     private Renderer mRenderer;                                 //用户附加的Renderer或用来监听Renderer
     private TextureFilter mEffectFilter;                        //特效处理的Filter
+    private GroupFilter mGroupFilter;                           //中间特效
     private AFilter mShowFilter;                                //用来渲染输出的Filter
     private Point mDataSize;                                    //数据的大小
     private Point mWindowSize;                                  //输出视图的大小
@@ -89,11 +92,11 @@ public class TextureController implements GLSurfaceView.Renderer {
 
         mEffectFilter = new TextureFilter(mContext.getResources());
         mShowFilter = new NoFilter(mContext.getResources());
+        mGroupFilter = new GroupFilter(mContext.getResources());
 
-        //设置默认的DateSize，DataSize由AiyaProvider根据数据源的图像宽高进行设置
-        mDataSize = new Point(720, 1280);
-
-        mWindowSize = new Point(720, 1280);
+        //设置默认的DateSize
+        mDataSize = new Point(1080, 1920);
+        mWindowSize = new Point(1080, 1920);
     }
 
     //在Surface创建前，应该被调用
@@ -118,6 +121,7 @@ public class TextureController implements GLSurfaceView.Renderer {
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         mEffectFilter.create();
         mShowFilter.create();
+        mGroupFilter.create();
         if (!isParamSet.get()) {
             if (mRenderer != null) {
                 mRenderer.onSurfaceCreated(gl, config);
@@ -143,6 +147,7 @@ public class TextureController implements GLSurfaceView.Renderer {
         mShowFilter.setSize(width, height);
         mShowFilter.setMatrix(SM);
         mEffectFilter.setSize(mDataSize.x, mDataSize.y);
+        mGroupFilter.setSize(mDataSize.x, mDataSize.y);
         mShowFilter.setSize(mDataSize.x, mDataSize.y);
         if (mRenderer != null) {
             mRenderer.onSurfaceChanged(gl, width, height);
@@ -153,10 +158,12 @@ public class TextureController implements GLSurfaceView.Renderer {
     public void onDrawFrame(GL10 gl) {
         if (isParamSet.get()) {
             mEffectFilter.draw();  // 特效的过滤器先画
+            mGroupFilter.setTextureId(mEffectFilter.getOutputTexture()); // 其他过滤器拿到当前的SurfaceTexture再画
+            mGroupFilter.draw();
             //显示传入的texture上，一般是显示在屏幕上
             GLES20.glViewport(0, 0, mWindowSize.x, mWindowSize.y);
             mShowFilter.setMatrix(SM);
-            mShowFilter.setTextureId(mEffectFilter.getOutputTexture());
+            mShowFilter.setTextureId(mGroupFilter.getOutputTexture());
             mShowFilter.draw();  // 其他过滤器拿到当前的SurfaceTexture再画
             if (mRenderer != null) {
                 mRenderer.onDrawFrame(gl);
@@ -164,6 +171,16 @@ public class TextureController implements GLSurfaceView.Renderer {
             callbackIfNeeded();
         }
     }
+
+    /**
+     * 增加滤镜
+     *
+     * @param filter 滤镜
+     */
+    public void addFilter(AFilter filter) {
+        mGroupFilter.addFilter(filter);
+    }
+
 
     public void takePhoto() {
         isShoot = true;
