@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.renhui.opengles20study.camera.preview.PreviewCameraActivity;
+import com.renhui.opengles20study.camera.takepic.TakePictureActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
         // setContentView(new ImageGLSurfaceView(this)); // 加载图片
 
-        startActivity(new Intent(this, PreviewCameraActivity.class));
+        // startActivity(new Intent(this, PreviewCameraActivity.class));  // OpenGL预览摄像头
+
+        startActivity(new Intent(this, TakePictureActivity.class));  // OpenGL 拍照
     }
 }

@@ -3,6 +3,8 @@
     package="com.renhui.opengles20study">
 
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <!-- Tell the system this app requires OpenGL ES 2.0. -->
     <uses-feature android:glEsVersion="0x00020000" android:required="true" />
@@ -24,6 +26,7 @@
 
         <activity android:name=".camera.preview.PreviewCameraActivity" android:screenOrientation="portrait"/>
 
+        <activity android:name=".camera.takepic.TakePictureActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
