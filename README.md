@@ -24,9 +24,13 @@ OpenGL ES 2.0 学习项目笔记
 平移、旋转、缩放
 
 
-## 学习阶段三：OpenGLES 预览 Camera
+## 学习阶段三：OpenGLES + Camera
 
-1. 利用OpenGLES完成Camera基本预览效果
+### 预览
+利用OpenGLES完成Camera基本预览效果
+
+### 拍照
+基于预览完成拍照，并增加水印功能
 
 
 
