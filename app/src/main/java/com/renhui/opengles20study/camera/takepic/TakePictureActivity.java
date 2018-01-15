@@ -38,7 +38,7 @@ public class TakePictureActivity extends Activity implements FrameCallback {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mRenderer = new Camera1Renderer();
+        mRenderer = new CameraRenderer();
 
         setContentView(R.layout.activity_takepic);
 
@@ -151,7 +151,7 @@ public class TakePictureActivity extends Activity implements FrameCallback {
 
     }
 
-    private class Camera1Renderer implements Renderer {
+    private class CameraRenderer implements Renderer {
 
         private Camera mCamera;
 
@@ -173,7 +173,7 @@ public class TakePictureActivity extends Activity implements FrameCallback {
             }
             mCamera = Camera.open(cameraId);
             mController.setImageDirection(cameraId);
-            Camera.Size size = mCamera.getParameters().getPreviewSize();
+            Camera.Size size = mCamera.getParameters().getPreviewSize();  // TODO 还可以拍的更高清 getSupportedPreviewSizes
             Log.e("111", size.width + "////" + size.height);
             mController.setDataSize(size.height, size.width);
             try {
