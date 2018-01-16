@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.renhui.opengles20study.R;
-import com.renhui.opengles20study.camera.takepic.filter.WaterMarkFilter;
+import com.renhui.opengles20study.camera.filter.WaterMarkFilter;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -50,7 +50,7 @@ public class TakePictureActivity extends Activity implements FrameCallback {
         mController = new TextureController(TakePictureActivity.this);
 
         // 添加水印
-        WaterMarkFilter filter = new WaterMarkFilter(getResources());
+        WaterMarkFilter filter = new WaterMarkFilter();
         filter.setWaterMark(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
         filter.setPosition(600, 500, 192, 192);
 

@@ -1,8 +1,8 @@
-package com.renhui.opengles20study.camera.takepic.filter;
+package com.renhui.opengles20study.camera.filter;
 
-import android.content.res.Resources;
 import android.opengl.GLES20;
 
+import com.renhui.opengles20study.camera.filter.BaseFilter;
 import com.renhui.opengles20study.camera.takepic.utils.MatrixUtils;
 
 import java.util.ArrayList;
@@ -10,15 +10,15 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class GroupFilter extends AFilter {
+public class GroupFilter extends BaseFilter {
 
-    private Queue<AFilter> mFilterQueue;
-    private List<AFilter> mFilters;
+    private Queue<BaseFilter> mFilterQueue;
+    private List<BaseFilter> mFilters;
     private int width = 0, height = 0;
     private int size = 0;
 
-    public GroupFilter(Resources res) {
-        super(res);
+    public GroupFilter() {
+        super();
         mFilters = new ArrayList<>();
         mFilterQueue = new ConcurrentLinkedQueue<>();
     }
@@ -28,14 +28,14 @@ public class GroupFilter extends AFilter {
 
     }
 
-    public void addFilter(final AFilter filter) {
+    public void addFilter(final BaseFilter filter) {
         //绘制到frameBuffer上和绘制到屏幕上的纹理坐标是不一样的
         //Android屏幕相对GL世界的纹理Y轴翻转
         MatrixUtils.flip(filter.getMatrix(), false, true);
         mFilterQueue.add(filter);
     }
 
-    public boolean removeFilter(AFilter filter) {
+    public boolean removeFilter(BaseFilter filter) {
         boolean b = mFilters.remove(filter);
         if (b) {
             size--;
@@ -43,8 +43,8 @@ public class GroupFilter extends AFilter {
         return b;
     }
 
-    public AFilter removeFilter(int index) {
-        AFilter f = mFilters.remove(index);
+    public BaseFilter removeFilter(int index) {
+        BaseFilter f = mFilters.remove(index);
         if (f != null) {
             size--;
         }
@@ -61,7 +61,7 @@ public class GroupFilter extends AFilter {
         updateFilter();
         textureIndex = 0;
         if (size > 0) {
-            for (AFilter filter : mFilters) {
+            for (BaseFilter filter : mFilters) {
                 GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, fFrame[0]);
                 GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0,
                         GLES20.GL_TEXTURE_2D, fTexture[textureIndex % 2], 0);
@@ -82,7 +82,7 @@ public class GroupFilter extends AFilter {
     }
 
     private void updateFilter() {
-        AFilter f;
+        BaseFilter f;
         while ((f = mFilterQueue.poll()) != null) {
             f.create();
             f.setSize(width, height);

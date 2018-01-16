@@ -1,12 +1,11 @@
-package com.renhui.opengles20study.camera.takepic.filter;
+package com.renhui.opengles20study.camera.filter;
 
-import android.content.res.Resources;
 import android.graphics.SurfaceTexture;
 import android.opengl.GLES20;
 
 import com.renhui.opengles20study.camera.takepic.utils.EasyGlUtils;
 
-public class TextureFilter extends AFilter {
+public class TextureFilter extends BaseFilter {
 
     private CameraFilter mFilter;
     private int width = 0;
@@ -19,9 +18,9 @@ public class TextureFilter extends AFilter {
     private SurfaceTexture mSurfaceTexture;
     private float[] mCoordOM = new float[16];
 
-    public TextureFilter(Resources mRes) {
-        super(mRes);
-        mFilter = new CameraFilter(mRes);
+    public TextureFilter() {
+        super();
+        mFilter = new CameraFilter();
     }
 
     public void setCoordMatrix(float[] matrix) {

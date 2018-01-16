@@ -1,25 +1,23 @@
-package com.renhui.opengles20study.camera.takepic.filter;
+package com.renhui.opengles20study.camera.filter;
 
-import android.content.res.Resources;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 
 import java.util.Arrays;
 
-public class OesFilter extends AFilter {
+public class OesFilter extends BaseFilter {
 
-    private String vertexCode = "attribute vec4 vPosition;\n" +
+    String vertexShaderCode = "attribute vec4 vPosition;\n" +
             "attribute vec2 vCoord;\n" +
             "uniform mat4 vMatrix;\n" +
             "uniform mat4 vCoordMatrix;\n" +
             "varying vec2 textureCoordinate;\n" +
-            "\n" +
             "void main(){\n" +
             "    gl_Position = vMatrix*vPosition;\n" +
             "    textureCoordinate = (vCoordMatrix*vec4(vCoord,0,1)).xy;\n" +
             "}";
 
-    private String fragmentCode = "#extension GL_OES_EGL_image_external : require\n" +
+    String fragmentShaderCode = "#extension GL_OES_EGL_image_external : require\n" +
             "precision mediump float;\n" +
             "varying vec2 textureCoordinate;\n" +
             "uniform samplerExternalOES vTexture;\n" +
@@ -27,16 +25,16 @@ public class OesFilter extends AFilter {
             "    gl_FragColor = texture2D( vTexture, textureCoordinate );\n" +
             "}";
 
+
     private int mHCoordMatrix;
     private float[] mCoordMatrix = Arrays.copyOf(OM, 16);
 
-    public OesFilter(Resources mRes) {
-        super(mRes);
+    public OesFilter() {
     }
 
     @Override
     protected void onCreate() {
-        createProgram(vertexCode, fragmentCode);
+        createProgram(vertexShaderCode, fragmentShaderCode);
         mHCoordMatrix = GLES20.glGetUniformLocation(mProgram, "vCoordMatrix");
     }
 
@@ -61,4 +59,5 @@ public class OesFilter extends AFilter {
     protected void onSizeChanged(int width, int height) {
 
     }
+
 }

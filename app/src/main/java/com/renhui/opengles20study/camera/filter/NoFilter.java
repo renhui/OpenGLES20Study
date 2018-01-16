@@ -1,9 +1,9 @@
-package com.renhui.opengles20study.camera.takepic.filter;
+package com.renhui.opengles20study.camera.filter;
 
-import android.content.res.Resources;
+import com.renhui.opengles20study.camera.filter.BaseFilter;
 
 
-public class NoFilter extends AFilter {
+public class NoFilter extends BaseFilter {
 
     String vertexCode = "attribute vec4 vPosition;\n" +
             "attribute vec2 vCoord;\n" +
@@ -23,8 +23,8 @@ public class NoFilter extends AFilter {
             "    gl_FragColor = texture2D( vTexture, textureCoordinate );\n" +
             "}";
 
-    public NoFilter(Resources res) {
-        super(res);
+    public NoFilter() {
+        super();
     }
 
     @Override

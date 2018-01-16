@@ -1,7 +1,6 @@
-package com.renhui.opengles20study.camera.takepic.filter;
+package com.renhui.opengles20study.camera.filter;
 
 
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
@@ -19,9 +18,8 @@ public class WaterMarkFilter extends NoFilter {
 
     private int x,y,w,h;
 
-    public WaterMarkFilter(Resources mRes) {
-        super(mRes);
-        mFilter=new NoFilter(mRes){
+    public WaterMarkFilter() {
+        mFilter=new NoFilter(){
             @Override
             protected void onClear() {
 

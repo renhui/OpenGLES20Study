@@ -1,4 +1,4 @@
-package com.renhui.opengles20study.camera.preview.filter;
+package com.renhui.opengles20study.camera.filter;
 
 import android.opengl.GLES20;
 import android.util.SparseArray;
@@ -55,6 +55,8 @@ public abstract class BaseFilter extends BaseGLSL {
      * 纹理坐标Buffer
      */
     protected FloatBuffer mTexBuffer;
+
+    protected int mFlag = 0;
 
     private float[] matrix = Arrays.copyOf(OM, 16);
 
@@ -123,6 +125,21 @@ public abstract class BaseFilter extends BaseGLSL {
     public final void setTextureId(int textureId) {
         this.textureId = textureId;
     }
+
+    public void setFlag(int flag) {
+        this.mFlag = flag;
+    }
+
+    public int getFlag() {
+        return mFlag;
+    }
+
+
+    // 需要继承子类的后，实现其逻辑，基类默认返回-1
+    public int getOutputTexture() {
+        return -1;
+    }
+
 
     /**
      * 实现此方法，完成程序的创建，可直接调用createProgram来实现

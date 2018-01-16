@@ -1,12 +1,14 @@
-package com.renhui.opengles20study.camera.takepic.filter;
+package com.renhui.opengles20study.camera.filter;
 
 import android.content.res.Resources;
 import android.hardware.Camera;
 
+import com.renhui.opengles20study.camera.filter.OesFilter;
+
 public class CameraFilter extends OesFilter {
 
-    public CameraFilter(Resources mRes) {
-        super(mRes);
+    public CameraFilter() {
+        super();
     }
 
     @Override

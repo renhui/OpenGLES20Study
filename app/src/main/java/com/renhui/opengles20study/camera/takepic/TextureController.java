@@ -8,10 +8,10 @@ import android.opengl.GLSurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.renhui.opengles20study.camera.takepic.filter.AFilter;
-import com.renhui.opengles20study.camera.takepic.filter.GroupFilter;
-import com.renhui.opengles20study.camera.takepic.filter.NoFilter;
-import com.renhui.opengles20study.camera.takepic.filter.TextureFilter;
+import com.renhui.opengles20study.camera.filter.BaseFilter;
+import com.renhui.opengles20study.camera.filter.GroupFilter;
+import com.renhui.opengles20study.camera.filter.NoFilter;
+import com.renhui.opengles20study.camera.filter.TextureFilter;
 import com.renhui.opengles20study.camera.takepic.utils.EasyGlUtils;
 import com.renhui.opengles20study.camera.takepic.utils.MatrixUtils;
 
@@ -38,7 +38,7 @@ public class TextureController implements GLSurfaceView.Renderer {
     private Renderer mRenderer;                                 //用户附加的Renderer或用来监听Renderer
     private TextureFilter mEffectFilter;                        //特效处理的Filter
     private GroupFilter mGroupFilter;                           //中间特效
-    private AFilter mShowFilter;                                //用来渲染输出的Filter
+    private BaseFilter mShowFilter;                                //用来渲染输出的Filter
     private Point mDataSize;                                    //数据的大小
     private Point mWindowSize;                                  //输出视图的大小
     private AtomicBoolean isParamSet = new AtomicBoolean(false);
@@ -90,9 +90,9 @@ public class TextureController implements GLSurfaceView.Renderer {
         v.addView(mGLView);
         v.setVisibility(View.GONE);
 
-        mEffectFilter = new TextureFilter(mContext.getResources());
-        mShowFilter = new NoFilter(mContext.getResources());
-        mGroupFilter = new GroupFilter(mContext.getResources());
+        mEffectFilter = new TextureFilter();
+        mShowFilter = new NoFilter();
+        mGroupFilter = new GroupFilter();
 
         //设置默认的DateSize
         mDataSize = new Point(1080, 1920);
@@ -177,7 +177,7 @@ public class TextureController implements GLSurfaceView.Renderer {
      *
      * @param filter 滤镜
      */
-    public void addFilter(AFilter filter) {
+    public void addFilter(BaseFilter filter) {
         mGroupFilter.addFilter(filter);
     }
 
@@ -234,8 +234,7 @@ public class TextureController implements GLSurfaceView.Renderer {
 
     //读取数据并回调
     private void frameCallback() {
-        GLES20.glReadPixels(0, 0, frameCallbackWidth, frameCallbackHeight,
-                GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, outPutBuffer[indexOutput]);
+        GLES20.glReadPixels(0, 0, frameCallbackWidth, frameCallbackHeight, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, outPutBuffer[indexOutput]);
         mFrameCallback.onFrame(outPutBuffer[indexOutput].array(), 0);
     }
 
